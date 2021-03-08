@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 loginRouter.post('', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email, password)
     let fetchedProfile;
     Profile.findOne({email: email}).then(
         (profile) => {
@@ -16,6 +17,7 @@ loginRouter.post('', (req, res, next) => {
                     auth: false
                 })
             }else{
+                 console.log(profile.password)
                  fetchedProfile = profile;
                  return bcrypt.compare(password, profile.password)
             }
